@@ -54,7 +54,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 class izhCell():
     def __init__(self,stimVal):
         # Define Neuron Parameters
@@ -65,21 +64,19 @@ class izhCell():
         self.k=0.7
         self.a=0.03
         self.b=-2
-        self.c=-56
+        self.c=-50
         self.d=100
         self.vpeak=35
         self.stimVal = stimVal
     
-        
         # Set up the simulation
         self.T=1000 # ms
         self.tau=1 # ms - time step
         self.n=int(np.round(self.T/self.tau))
         
         # Set up the stimulation
-#        self.I = np.concatenate((np.zeros((1,int(0.1*self.n))),self.stimVal*np.ones((1,int(0.01*self.n))),self.stimVal*.1*np.ones((1,int(0.89*self.n)))), axis=1)
-        self.I = np.concatenate((np.zeros((1,int(0.1*self.n))), 
-                 self.stimVal*np.ones((1,int(0.9*self.n)))), axis=1)
+        # self.I = np.concatenate((np.zeros((1,int(0.1*self.n))),self.stimVal*np.ones((1,int(0.9*self.n)))), axis=1)
+        self.I = np.concatenate((np.zeros((1,int(0.1*self.n))),self.stimVal*np.ones((1,int(0.01*self.n))),self.stimVal*.1*np.ones((1,int(0.89*self.n)))), axis=1)
 
         # Set up placeholders for my outputs from the simulation              
         self.v=self.vr*np.ones((1,self.n))
@@ -96,9 +93,9 @@ class izhCell():
             self.u[0,i+1]=self.u[0,i]+self.tau*self.a*(self.b*(self.v[0,i]-self.vr)-self.u[0,i])
             
             if self.v[0,i+1]>=self.vpeak:
-                    self.v[0,i]=self.vpeak
-                    self.v[0,i+1]=self.c
-                    self.u[0,i+1]=self.u[0,i+1]+self.d 
+                self.v[0,i]=self.vpeak
+                self.v[0,i+1]=self.c
+                self.u[0,i+1]=self.u[0,i+1]+self.d 
                     
 def plotMyData(somecell, upLim = 1000):
     tau = somecell.tau
