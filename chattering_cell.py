@@ -3,7 +3,7 @@ import izhikevich_cells as izh
 class chCell(izh.izhCell):
     def __init__(self, stimVal):
         super().__init__(stimVal)
-        self.celltype='Intrinsically Bursting'
+        self.celltype='Chattering'
         self.C=50
         self.vr=-60
         self.vt=-40
