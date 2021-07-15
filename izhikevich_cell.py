@@ -57,7 +57,7 @@ import matplotlib.pyplot as plt
 class izhCell():
     def __init__(self,stimVal):
         # Define Neuron Parameters
-        self.celltype='Generic Izhikevich' # Regular spiking
+        self.celltype ='Generic Izhikevich' # Regular spiking
         self.C=100
         self.vr=-60
         self.vt=-40
@@ -75,8 +75,7 @@ class izhCell():
         self.n=int(np.round(self.T/self.tau))
         
         # Set up the stimulation
-        # self.I = np.concatenate((np.zeros((1,int(0.1*self.n))),self.stimVal*np.ones((1,int(0.9*self.n)))), axis=1)
-        self.I = np.concatenate((np.zeros((1,int(0.1*self.n))),self.stimVal*np.ones((1,int(0.01*self.n))),self.stimVal*.1*np.ones((1,int(0.89*self.n)))), axis=1)
+        self.I = np.concatenate((np.zeros((1,int(0.1*self.n))),self.stimVal*np.ones((1,int(0.9*self.n)))), axis=1)
 
         # Set up placeholders for my outputs from the simulation              
         self.v=self.vr*np.ones((1,self.n))
@@ -88,7 +87,7 @@ class izhCell():
     def simulate(self):    
         # Run the simulation
         # print("vpeak = ", self.vpeak)
-        for i in range(1,self.n-1):
+        for i in range(0,self.n-1):
             self.v[0,i+1]=self.v[0,i]+self.tau*(self.k*(self.v[0,i]-self.vr)*(self.v[0,i]-self.vt)-self.u[0,i]+self.I[0,i])/self.C
             self.u[0,i+1]=self.u[0,i]+self.tau*self.a*(self.b*(self.v[0,i]-self.vr)-self.u[0,i])
             
@@ -112,7 +111,7 @@ def plotMyData(somecell, upLim = 1000):
     plt.show()
 
 def createCell():
-    myCell = izhCell(stimVal=4000)        
+    myCell = izhCell(stimVal=400)        
     myCell.simulate()
     plotMyData(myCell)
     

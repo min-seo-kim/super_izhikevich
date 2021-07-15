@@ -1,7 +1,8 @@
-import izhikevich_cells as izh
+import izhikevich_cell as izh
 
 class chCell(izh.izhCell):
     def __init__(self, stimVal):
+        # Define Neuron Parameters
         super().__init__(stimVal)
         self.celltype='Chattering'
         self.C=50
@@ -14,7 +15,7 @@ class chCell(izh.izhCell):
         self.d=150
         self.vpeak=25
         
-myCell = chCell(4000)
+myCell = chCell(400)
 myCell.simulate()
 
 if __name__=='__main__':

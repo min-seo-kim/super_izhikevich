@@ -1,7 +1,8 @@
-import izhikevich_cells as izh
+import izhikevich_cell as izh
 
 class ibCell(izh.izhCell):
     def __init__(self, stimVal):
+        # Define Neuron Parameters
         super().__init__(stimVal)
         self.celltype='Intrinsically Bursting'
         self.C=150
@@ -14,7 +15,7 @@ class ibCell(izh.izhCell):
         self.d=130
         self.vpeak=50
         
-myCell = ibCell(4000)
+myCell = ibCell(400)
 myCell.simulate()
 
 if __name__=='__main__':
